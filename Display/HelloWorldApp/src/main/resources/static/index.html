@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hello World</title>
+</head>
+<body>
+    <h1>Frontend</h1>
+    <button onclick="fetchHelloWorld()">Get Hello World</button>
+    <p id="message"></p>
+
+    <script>
+        function fetchHelloWorld() {
+    fetch('http://192.168.65.128:8080/hello')
+        .then(response => {
+            // 检查响应是否成功
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.text();
+        })
+        .then(data => {
+            // 更新页面显示内容
+            document.getElementById('message').innerText = data;
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            document.getElementById('message').innerText = `Error occurred: ${error.message}`;
+        });
+}
+
+    </script>
+</body>
+</html>
